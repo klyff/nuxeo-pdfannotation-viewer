@@ -1,0 +1,19 @@
+<div>
+    <button data-remodal-action="close" class="remodal-close" ng-click="closePopup()"></button>
+    <div ng-repeat="comment in annotation.comments">
+        <img src="images/user_reply.svg" width="15" ng-show="$index > 0" class="user-reply-icon"/>
+        <span ng-class="$index == 0 ? 'annotation-form-header-username' : 'annotation-form-username'">{{comment.username}}</span><br/>
+        <span class="annotation-form-header-date-created">DATE CREATED: {{comment.dateCreated | date: 'MMM d, yyyy' | uppercase}}</span><br/>
+        <span class="annotation-form-header-comment" ng-if="(key == 'reply' && $index < annotation.comments.length - 1) ||
+            (key == 'edit' && $index > 0) || (key == 'view' && annotation.isReadOnly())">
+            {{annotation.annotationType == getMeasurementAreaAnnotationTypeId()  && $index == 0 ? annotation.getArea() :
+            (comment.comment != '' ? comment.comment : 'No comment supplied') }}
+        </span>
+        <span ng-if="(key == 'edit' && comment.username == currentUsername && $index == 0) ||
+            (key == 'reply' && $index == annotation.comments.length - 1)">
+            <textarea id="comment" ng-model="formComment.comment" rows="5"></textarea><br/>
+            <button class="toolbarButton annotation-form-save"accesskey="s" ng-click="saveComment()"><u>S</u>ave</button>
+        </span>
+        <div class="hr" ng-if="annotation.comments.length > 1 && $index < annotation.comments.length - 1"/>
+    </div>
+</div>

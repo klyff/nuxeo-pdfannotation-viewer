@@ -1,0 +1,38 @@
+<div>
+    <button data-remodal-action="close" class="remodal-close" ng-click="closePopup()"></button>
+    <div>
+        <div class="propertyRow" ng-show="annotation.annotationType == getTypeTextAnnotationTypeId()">
+            Text <span class="subLabel">(Limit: {{getTypeTextCharLimit()}} characters)</span>
+            <input type="text" ng-model="property.text" size="20" maxlength="{{getTypeTextCharLimit()}}"
+               ng-change="updateText()" ng-model-options="{debounce: 1000}"/>
+        </div>
+        <div class="propertyRow" ng-show="annotation.annotationType == getTypeTextAnnotationTypeId()">
+            Font Size
+            <select ng-model="property.fontSize" ng-change="updateFontSize()">
+                <option ng:repeat="n in range(property.fontSizeMin, property.fontSizeMax)" value="{{n}}">{{n}}</option>
+            </select>
+        </div>
+        <div class="propertyRow" ng-class="annotation.annotationType == getTypeTextAnnotationTypeId() ? 'propertyDivider' : ''" ng-show="annotation.hasBackgroundColorProperty()">
+            <button class="toolbarButton" title="Background Color" ng-click="showBackgroundColorPicker()">
+                <img src="images/color_bg.svg" width="14" height="14"/>
+                <div class="propertyColor" ng-style="{background: annotation.backgroundColor}"></div>
+            </button>
+            <input type="color" id="backgroundPaletteProperty" class="colorPickerHidden"/>
+            Background Color
+        </div>
+        <div class="propertyRow" ng-show="annotation.hasForegroundColorProperty()">
+            <button class="toolbarButton" title="Foreground Color" ng-click="showForegroundColorPicker()">
+                <img src="images/color_fg.svg" width="14" height="14"/>
+                <div class="propertyColor" ng-style="{background: annotation.color}"></div>
+            </button>
+            <input type="color" id="colorPaletteProperty" class="colorPickerHidden"/>
+            Foreground Color
+        </div>
+        <div class="propertyDivider propertyRow" ng-if="annotation.usesMeasurementType()">
+            Measurement Type<br/>
+            <select ng-options="mt.name for mt in measurementTypes"
+                ng-model="annotation.measurementTypeChosen"
+                ng-change="measurementTypeChanged()"/>
+        </div>
+    </div>
+</div>

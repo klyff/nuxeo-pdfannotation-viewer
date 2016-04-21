@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.platform.pdfpreviewer.rest.contrib">
+
+   <extension target="org.nuxeo.ecm.platform.ui.web.restAPI.service.PluggableRestletService" point="restlets">
+
+      <restletPlugin name="pdfconvert" class="org.nuxeo.platform.pdfviewer.rest.PDFConvertServiceRestlet" enabled="true"
+                     useSeam="true">
+         <urlPatterns>
+            <urlPattern>/{docID}/pdfconvert</urlPattern>
+         </urlPatterns>
+
+      </restletPlugin>
+            
+      <restletPlugin name="annotation" class="org.nuxeo.platform.pdfviewer.rest.AnnotationServiceRestlet" enabled="true"
+                     useSeam="true">
+         <urlPatterns>
+            <urlPattern>/{docID}/annotation</urlPattern>
+            <urlPattern>{repo}/{docID}/annotation</urlPattern>
+         </urlPatterns>
+
+      </restletPlugin>
+
+   </extension>
+</component>

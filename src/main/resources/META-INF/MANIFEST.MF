@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Require-Bundle: org.nuxeo.runtime,
+ org.nuxeo.ecm.core.api,
+ org.nuxeo.ecm.core,
+ org.nuxeo.ecm.webapp.core,
+ nuxeo.ecm.webapp.ui,
+ org.nuxeo.ecm.webapp.base,
+ org.nuxeo.ecm.platform.ui
+Bundle-Vendor: Klyff Harlley
+Bundle-Version: 1.0.0
+Bundle-Name: Nuxeo PdfViewer Annotation
+Bundle-ManifestVersion: 2
+Provide-Package: org.nuxeo.platform.pdfviewer
+Bundle-SymbolicName: org.nuxeo.platform.pdfviewer
+Nuxeo-Component: OSGI-INF/actions-contrib.xml, 
+ OSGI-INF/restlets-contrib.xml,
+ OSGI-INF/core-types-contrib.xml,
+ OSGI-INF/nxaudit-service-contrib.xml,
+ OSGI-INF/automation-contrib.xml
+

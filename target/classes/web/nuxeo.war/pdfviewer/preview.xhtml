@@ -1,0 +1,38 @@
+<div xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:nxd="http://nuxeo.org/nxweb/document" xmlns:nxthemes="http://nuxeo.org/nxthemes"
+    xmlns:nxu="http://nuxeo.org/nxweb/util" xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    <script type="text/javascript" src="#{baseURL}pdfviewer/lib/seam-remote.js"></script>
+    <script type="text/javascript" src="#{baseURL}pdfviewer/lib/seam-loading.js"></script>
+    <script type="text/javascript" src="#{baseURL}seam/resource/remoting/interface.js?#{SeamRemotingBeanNames}">
+    </script>
+    <script type="text/javascript">
+        <h:outputText value="var currentConversationId='#{nxu:javaScriptEscape(nxu:htmlEscape(org.jboss.seam.core.manager.currentConversationId))}';" />
+        <h:outputText value="var currentDocURL='#{currentServerLocation.name}/#{currentDocument.id}';" />
+        
+        
+        // set the conversation id before doing any call
+        Seam.Remoting.getContext().setConversationId(currentConversationId);
+        Seam.Remoting.contextPath = '#{contextPath}';
+        Seam.Remoting.resourcePath = '#{contextPath}/seam/resource/remoting';
+        
+    </script>
+
+    <h:form id="document_view">
+       <div id="baseURL" style="display: none;"><h:outputText value="#{baseURL}" /></div>
+       <div id="currentUser" style="display: none;"><h:outputText value="#{currentUser.name}" /></div>
+       <div id="annotationURL" style="display: none;"><h:outputText value="#{baseURL}restAPI/#{currentDocument.id}/" /></div>
+       <div id="repository" style="display: none;"><h:outputText value="#{ViewerSeam.currentRepository('')}/" /></div>
+       <div id="printurl" style="display: none;"><h:outputText value="#{baseURL}restAPI/#{currentDocument.id}/pdfconvert" /></div>
+
+        <iframe id="viewer"
+            src="#{baseURL}pdfviewer/generic/annotationeer/index.html?file=#{baseURL}restAPI/#{currentDocument.id}/pdfconvert"
+            scrolling="auto" width="100%" height="100%" style="min-height: 900px; height: 100%; max-height: 5000px"> </iframe>
+
+
+
+    </h:form>
+
+</div>

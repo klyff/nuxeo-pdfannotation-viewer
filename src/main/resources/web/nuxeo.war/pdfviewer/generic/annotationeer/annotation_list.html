@@ -1,0 +1,22 @@
+<table id="annotationList" width="100%" cellspacing="0" cellpadding="0" ng-controller="AnnotationListController">
+    <tr id="{{annotation.id}}" ng-repeat="annotation in annotations | orderBy: 'pageIndex'"
+        ng-class="annotation.selected ? 'selected' : ''" ng-click="click($event, annotation)"
+        ng-show="annotation.modified != 'delete'">
+        <td width="100%">
+            <div class="annotation-row">
+                <img ng-src="images/{{getImage(annotation.annotationType)}}" height="20" class="annotation-icon"/>
+                <div class="annotation-detail">
+                    <span class="username">{{annotation.comments.length > 0 ? annotation.comments[0].username : 'No Username'}}</span><br/>
+                    <span class="page">Page {{annotation.pageIndex + 1}} -
+                    {{annotation.comments[0].dateCreated | date: 'MMM d, yyyy'}}</span>
+                </div>
+            </div>
+            <div class="annotation-action">
+                <!-- Measurement area annotation root comment should not be editable, contains area value. -->
+                <img src="images/edit.svg" height="16" ng-class="annotation.annotationType == getMeasurementAreaAnnotationTypeId() ? 'hidden' : ''" class="button annotation-action-icon" ng-click="edit(annotation)"/>
+                <img src="images/reply.svg" height="16" class="button annotation-action-icon" ng-click="reply(annotation)"/>
+                <img src="images/delete.svg" height="16" class="button annotation-action-icon" ng-click="delete(annotation)"/>
+            </div>
+        </td>
+    </tr>
+</table>

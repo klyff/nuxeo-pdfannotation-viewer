@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.platform.preview.actions" version="3.0.1">
+
+   <!-- <require>org.nuxeo.runtime.started</require> -->
+
+   <extension target="org.nuxeo.ecm.platform.actions.ActionService" point="actions">
+
+      <!--      Add the TAB preview for documents -->
+      <action id="TAB_PREVIEW_PDF" link="/pdfviewer/preview.xhtml" enabled="true" order="12" label="label.document.preview"
+              icon="/icons/file.gif" type="rest_document_link">
+         <category>VIEW_ACTION_LIST</category>
+         <filter id="pdf_viewer_preview">
+            <rule grant="true">
+               <condition>#{previewActions.hasPreview}</condition>
+            </rule>
+         </filter>
+      </action>
+
+      <!--  Overload the default preview facybox of Nuxeo 7.10 - Fancybox/Popup      -->
+      <action id="showFancyBoxPreview" order="50" type="fancybox" label="label.document.preview" icon="/icons/contextual_menu/preview.png">
+         <category>DOCUMENT_UPPER_ACTION</category>
+         <filter-id>view_preview</filter-id>
+         <filter-id>not_folder</filter-id>
+         <filter-id>not_anonymous</filter-id>
+         <properties>
+            <property name="iframe">
+               #{ViewerSeam.getPreviewURL()}
+            </property>
+            <property name="ajaxSupport">true</property>
+         </properties>
+      </action>
+      
+      <!-- Overload the default contextual menu preview action -->
+      <action id="blobPreview" link="#{ViewerSeam.getPreviewURL()}" type="bare_link"
+              label="label.document.preview" icon="/icons/contextual_menu/preview.png" order="150">
+         <category>BLOB_ACTIONS</category>
+<!--         <filter-id>hasPDFPreview</filter-id>-->
+         <properties>
+            <property name="target">_blank</property>
+         </properties>
+      </action>
+
+   </extension>
+
+
+   <extension target="org.nuxeo.ecm.platform.ui.web.SeamRemotingJSBuilderComponent" point="remotableSeamBeans">
+      <remotableSeamBeans>
+         <beans>
+            <bean>ViewerConversor</bean>
+            <bean>ViewerSeam</bean>
+         </beans>
+      </remotableSeamBeans>
+   </extension>
+
+</component>

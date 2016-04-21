@@ -1,0 +1,4 @@
+org/nuxeo/platform/pdfviewer/actions/PDFViewerSeam.class
+org/nuxeo/platform/pdfviewer/actions/PDFViewerConversorAction.class
+org/nuxeo/platform/pdfviewer/rest/PDFConvertServiceRestlet.class
+org/nuxeo/platform/pdfviewer/rest/AnnotationServiceRestlet.class

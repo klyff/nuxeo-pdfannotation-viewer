@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="smartecm.ecm.platform.audit.pdfviewe.annotations.contrib" version="1.0.0">
+   
+   <require>org.nuxeo.ecm.platform.audit.service.NXAuditEventsService</require>
+
+   <extension target="org.nuxeo.ecm.platform.audit.service.NXAuditEventsService"
+              point="event">
+      
+      <event name="annotationSaved" />
+      <event name="annotationDeleted" />
+      <event name="annotationLoaded"/>
+      <event name="messageSent"/>
+   
+   </extension>
+
+</component>
