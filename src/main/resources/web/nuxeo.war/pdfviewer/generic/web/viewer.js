@@ -581,22 +581,20 @@ Preferences._readFromStorage = function (prefObj) {
    var canvases; // During print task: non-live NodeList of <canvas> elements
    var index; // Index of <canvas> element that is being processed
 
-
-
    var print = window.print;
    window.print = function print() {
 
-//      if ((navigator.appName == 'Microsoft Internet Explorer')) {
-//         window.print(printurl, "_blank");
-//         return true;
-//
-//      } else if ((navigator.appName == 'Netscape')) {
-//
-//         var w = window.open(printurl, "_blank");
-//         w.print();
-//         w.close();
-//         return true;
-//      }
+      if ((navigator.appName == 'Microsoft Internet Explorer')) {
+         window.print(printurl, "_blank");
+         return true;
+
+      } else if ((navigator.appName == 'Netscape')) {
+
+         var w = window.open(printurl, "_blank");
+         w.print();
+         w.close();
+         return true;
+      }
 
       if (canvases) {
          console.warn('Ignored window.print() because of a pending print job.');

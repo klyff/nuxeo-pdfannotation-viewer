@@ -1,3 +1,4 @@
+
 <table id="annotationList" width="100%" cellspacing="0" cellpadding="0" ng-controller="AnnotationListController">
     <tr id="{{annotation.id}}" ng-repeat="annotation in annotations | orderBy: 'pageIndex'"
         ng-class="annotation.selected ? 'selected' : ''" ng-click="click($event, annotation)"

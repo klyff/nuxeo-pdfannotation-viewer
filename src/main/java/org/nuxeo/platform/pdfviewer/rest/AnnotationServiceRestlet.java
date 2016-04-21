@@ -146,9 +146,11 @@ public class AnnotationServiceRestlet extends BaseNuxeoRestlet implements Serial
          writer.write(annotation);
 
          /*Some time Nuxeo filter throws eceptions when we Flush the Writer here...*/
-         //writer.flush();
-         //writer.close();
-         //response.flushBuffer();
+         writer.flush();
+         writer.close();
+         response.flushBuffer();
+         
+         
       } catch (Exception e) {
          handleError(res, e);
          log.error("Error on Execution of AnnotationServiceRestlet: " + e.getLocalizedMessage(), e);
