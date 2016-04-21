@@ -1,10 +1,6 @@
 // This variable will be assigned when the user is logged in to the system
 
 
-//var username = parent._USER_;//'Username';
-
-//var annotations = [];//klyff
-
 var canvasIdName = 'pageAnnotation';
 var zIndex = 1000;
 
@@ -1172,7 +1168,7 @@ function saveAllAnnotationsToServer() {
    console.log('changedAnnotations size: ' + changedAnnotations.length);
 
    if (changedAnnotations.length == 0) {
-      alert('Nenhuma alteração a ser salva.');
+      alert('No changes to save.');
       return;
    }
 
@@ -1255,11 +1251,11 @@ function saveAllAnnotationsToServer() {
             }
          }
          resetAllAnnotationsChangedProperty(true);
-         alert('Anotações Salvas com exito!');
+         alert('All Annotations is saved!');
 
       },
       error: function (xhr, status, error) {
-         alert('Erro ao savar annotações: ' + error);
+         alert('Error to save annotations: ' + error);
       }
    });
 }
@@ -1284,42 +1280,5 @@ function resetAllAnnotationsChangedProperty(success) {
 
 function openAnnotationPropertiesForm(annotation) {
    angular.element($('#propertiesContainer')).scope().showPropertiesWindow(annotation);
-}
-
-function sendEmail() {
-   console.log('sendEmail()');
-   var email = prompt('Informe o(s) e-mails para enviar este documento (para vários use ";" para separar)');
-   if (email) {
-
-      $.ajax({
-         url: restUrl + annotationMailUrl,
-         type: 'post',
-         data: email,
-         contentType: 'application/json',
-         dataType: 'json',
-         cache: false,
-         success: function (response, status, xhr) {
-
-            for (var r = 0; r < response.length; r++) {
-
-               alert(r);
-
-               try {
-//                  json = JSON.parse(response[r]);
-               } catch (ex) {
-                  console.error(ex);
-               }
-
-//               alert('Email enviado com sucesso!');
-            }
-         }
-         ,
-         error: function (xhr, status, error) {
-//            alert('Erro ao enviar email: ' + error);
-            console.log('Erro ao enviar email: ' + error);
-         }
-      });
-
-   }
 }
 
