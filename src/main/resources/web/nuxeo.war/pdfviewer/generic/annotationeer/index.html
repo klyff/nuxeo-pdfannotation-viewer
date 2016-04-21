@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" mozdisallowselectionprint moznomarginboxes>
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <meta name="google" content="notranslate">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>Nuxeo Documenent Annotation</title>
+      <title>Nuxeo Preview Annotation</title>
 
       <link rel="stylesheet" href="../web/viewer.css"/>
 
@@ -30,8 +30,6 @@
       <script src="angular.ng-modules.js"></script>
       <script src="remodal.min.js"></script>
       <script src="ResizeSensor.js"></script>
-
-      <script src="clipboard.js"></script>
 
       <script src="scripts/urls.js"></script>
       <script src="scripts/util.js"></script>
@@ -262,10 +260,10 @@
                            <button id="aPageRotateCcw" class="toolbarButton" title="Rotate Counterclockwise" tabindex="25" data-l10n-id="page_rotate_ccw" onclick="rotateLeft()">
                               <img src="images/rotateccw.svg" width="16" height="16"/>
                            </button>
-                           <button id="aDownload" class="toolbarButton download hiddenSmallView" title="Download" tabindex="26" data-l10n-id="download" onclick="secondaryToolbarDownloadClick()">
+                           <button id="aDownload" class="toolbarButton download hiddenSmallView" title="Download" tabindex="26" data-l10n-id="download">
                               <span data-l10n-id="download_label">Download</span>
                            </button>
-                           <button id="aPrint" class="toolbarButton print hiddenSmallView" title="Print" tabindex="27" data-l10n-id="print" onclick="secondaryToolbarPrintClick()">
+                           <button id="aPrint" class="toolbarButton print hiddenSmallView" title="Print" tabindex="27" data-l10n-id="print" onclick="window.print();">
                               <span data-l10n-id="print_label">Print</span>
                            </button>
                         </div>
@@ -284,9 +282,6 @@
                         </button>
                         <input type="color" id="colorPalette" class="colorPickerHidden"/>
                         <div class="separator"></div>
-                        <button id="textSelection" class="toolbarButton" title="Enable text selection" tabindex="30" onclick="selectText(Annotation.TYPE_TEXT_SELECT)">
-                           <img src="images/text_selection.svg" width="16" height="16"/>
-                        </button>
                         <button id="text" class="toolbarButton" title="Text" tabindex="30" onclick="createText()">
                            <img src="images/text.svg" width="16" height="16"/>
                         </button>
@@ -360,10 +355,10 @@
                            <img src="images/save.svg" width="16" height="16"/>
                         </button>
 
-                        <button id="markText" class="toolbarButton hidden" title="Mark Text hidden" tabindex="49" style="float: right" onclick="markText()">
+                        <button id="markText" class="toolbarButton hidden" title="Mark Text" tabindex="48" style="float: right" onclick="markText()">
                            <img src="images/check.svg" width="16" height="16"/>
                         </button>
-                        <button id="cancelAnnotation" class="toolbarButton hidden" title="Cancel Annotation" tabindex="50" style="float: right" onclick="cancelCreateAnnotation();">
+                        <button id="cancelAnnotation" class="toolbarButton hidden" title="Cancel Annotation" tabindex="48" style="float: right" onclick="cancelCreateAnnotation();">
                            <img src="images/cancel.svg" width="16" height="16"/>
                         </button>
                      </div>
@@ -471,7 +466,18 @@
          </div>  <!-- overlayContainer -->
 
       </div> <!-- outerContainer -->
+      <div id="printContainer"></div>
+      <!--#if !(FIREFOX || MOZCENTRAL)-->
+      <!--#include viewer-snippet-mozPrintCallback-polyfill.html-->
+      <!--#endif-->
 
+      <div id="sidebarContainerRight" ng-module="annotationList" ng-include="'annotation_list.html'" class="hidden"></div>
+
+      <div id="popupContainer" ng-module="annotationForm" ng-include="'popup.html'" class="hidden" ng-controller="AnnotationFormController"></div>
+
+      <div id="playerContainer" ng-module="playerForm" ng-include="'record_mp3/player.html'" class="hidden" ng-controller="PlayerFormController"></div>
+
+      <div id="propertiesContainer" ng-module="propertiesForm" ng-include="'properties.html'" class="hidden" ng-controller="PropertiesFormController"></div>
 
    </body>
 
