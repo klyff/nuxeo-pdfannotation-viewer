@@ -1251,7 +1251,7 @@ function saveAllAnnotationsToServer() {
             }
          }
          resetAllAnnotationsChangedProperty(true);
-         alert('All Annotations is saved!');
+         alert('All annotations were saved with success!');
 
       },
       error: function (xhr, status, error) {
